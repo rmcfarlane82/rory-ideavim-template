@@ -1,0 +1,189 @@
+﻿"" ========================================================
+""" Base Settings
+"" ========================================================
+
+" Keep 10 lines on screen when scrolling
+set scrolloff=10
+
+" Show line numbers - another alternative is 'relativenumber'
+set linenumber
+
+" Show the current mode at the bottom of the screen
+set showmode
+
+" Display executed commands at the bottom of the screen
+set showcmd
+
+" Stop the annoying audible bell sound when entering invalid input
+set visualbell
+
+" Use the system clipboard for copy-pasting
+set clipboard+=unnamedplus
+
+"" ========================================================
+""" Search Optimizations
+"" ========================================================
+
+" Make searches case-insensitive
+set ignorecase
+
+" Make searches case-sensitive only if uppercase letters are used
+set smartcase
+
+" Start searching as you type instead of waiting for full input
+set incsearch
+
+" Highlight all search results
+set hlsearch
+
+"" ========================================================
+""" Third Party Plugins
+"" ========================================================
+
+" Enable changing the 'surrounds' of a block of text
+set surround
+
+" Highlight text immediately after yanking (copying)
+set highlightedyank
+
+" Enable NERDTree for file explorer with Vim-style navigation
+set nerdtree
+
+" Allow moving the cursor to any character on the screen with EasyMotion
+set easymotion
+
+" Prevent Vim from waiting for a timeout when a key is pressed
+set notimeout
+
+" Display available key mappings in the current mode with Which-Key
+set which-key
+
+"" ========================================================
+"" Plugin Settings
+"" ========================================================
+
+" Which-Key
+let g:WhichKey_FontSize = 16
+let g:WhichKey_CommandColor = "#41ead4"
+let g:WhichKey_PrefixColor = "#f335b2"
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+
+let g:WhichKeyDesc_leader = "<leader> Leader key"
+
+let g:WhichKeyDesc_leader = "<leader>x Open file explorer"
+
+let g:WhichKeyDesc_easymotion = "<leader>j Jump with Easymotion"
+let g:WhichKeyDesc_easymotion_prefix = "<leader><leader>"
+
+" Ungrouped
+let g:WhichKeyDesc_comment = "<leader>c Comment line"
+
+" Open o Group
+let g:WhichKeyDesc_open_window = "<leader>o Open"
+let g:WhichKeyDesc_open_explorer = "<leader>oe Explorer"
+let g:WhichKeyDesc_open_terminal = "<leader>ot Terminal"
+let g:WhichKeyDesc_open_git = "<leader>og Git"
+let g:WhichKeyDesc_open_services = "<leader>os Services"
+let g:WhichKeyDesc_open_commit = "<leader>oc Commit"
+let g:WhichKeyDesc_open_problems = "<leader>op Problems"
+let g:WhichKeyDesc_open_run = "<leader>or Run"
+
+" Close c Group
+let g:WhichKeyDesc_close_window = "<leader>c Close"
+let g:WhichKeyDesc_close_all = "<leader>co Close Other Tabs"
+let g:WhichKeyDesc_close_tab = "<leader>ca Close Active Tab"
+
+" Go to Group
+let g:WhichKeyDesc_goto = "<leader>g Go to"
+let g:WhichKeyDesc_goto_declaration = "<leader>gd Declaration"
+let g:WhichKeyDesc_goto_implementation = "<leader>gi Implementation"
+let g:WhichKeyDesc_goto_type = "<leader>gt Type"
+let g:WhichKeyDesc_goto_line = "<leader>gl Line"
+
+"" ========================================================
+""" Key Mappings
+"" ========================================================
+
+" Set the leader key to space
+let mapleader = " "
+
+" Make 'Q' perform gq formatting instead of entering Ex mode
+map Q gq
+map q <Nop>
+
+"" ========================================================
+""" Normal Mode Mappings (nnoremap)
+"" ========================================================
+
+"" ========================================================
+""" Visual Mode Mappings (vnoremap)
+"" ========================================================
+
+"" ========================================================
+"" Insert Mode Mappings (inoremap)
+"" ========================================================
+
+" Exit insert mode by typing 'jk'
+inoremap jk <Esc>
+
+" Popup navigation
+inoremap <C-j> <Esc>:action PopupMenu-selectNext<CR>a
+inoremap <C-k> <Esc>:action PopupMenu-selectPrev<CR>a
+
+"" ========================================================
+""" EasyMotion Mappings
+"" ========================================================
+
+" Use <leader>j to trigger EasyMotion 2-character search
+map <leader>j <Plug>(easymotion-s2)
+
+"" ========================================================
+""" Action Mappings
+"" ========================================================
+
+" Comment lines
+map <leader>c <Action>(CommentByLineComment)
+
+nnoremap <leader>rlv :action IdeaVim.ReloadVimRc.reload<CR>
+
+"" ========================================================
+"  Opening Windows 
+"" ========================================================
+
+" NERDTree
+" Open NERDTree (use q to exit)
+map <leader>oe :NERDTreeToggle<CR>
+" Open Terminal
+map <leader>ot <Action>(ActivateTerminalToolWindow)
+" Open Version Control
+map <leader>og <Action>(ActivateVersionControlToolWindow)
+" Open Commit
+map <leader>oc <Action>(ActivateCommitToolWindow)
+" Open Services
+map <leader>os <Action>(ActivateServicesToolWindow)
+" Open Run Tool
+map <leader>or <Action>(ActivateRunToolWindow)
+" Open Problems
+map <leader>op <Action>(ActivateProblemsViewToolWindow)
+
+"" ========================================================
+""" Closing Windows
+"" ========================================================
+
+" Close all windows except the current one
+map <leader>co <Action>(CloseAllEditorsButActive)
+" Close tab
+map <leader>ca <Action>(CloseContent)
+
+
+"" ========================================================
+""" GoTo Mappings
+"" ========================================================
+" Go to declaration
+map <leader>gd <Action>(GotoDeclaration)
+" Go to implementation
+map <leader>gi <Action>(GotoImplementation)
+" Go to type declaration
+map <leader>gt <Action>(GotoTypeDeclaration)
+" Go to line
+map <leader>gl <Action>(GotoLine)
