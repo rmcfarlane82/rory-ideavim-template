@@ -1,4 +1,4 @@
-﻿"" Rory ideavimrc
+"" Rory ideavimrc
 
 "" ========================================================
 """ Base Settings
@@ -11,7 +11,20 @@ set showmode             " Show the current mode at the bottom
 set showcmd              " Display executed commands at the bottom
 set visualbell           " Stop the annoying bell sound
 set clipboard+=unnamedplus " Use system clipboard
+" Enable auto-indentation
+filetype plugin indent on                  " Enable automatic filetype detection, filetype-specific plugins/indentation
+" Indentation
+set autoindent                             " Keep the indent when creating a new line
+set smarttab                               " Use shiftwidth and softtabstop to insert or delete (on <BS>) blanks
+set cindent                                " Recommended seting for automatic C-style indentation
+set autoindent                             " Automatic indentation in non-C files
+set foldmethod=indent                      " Fold based on source indentation
+set foldlevelstart=99                      " Expand all folds by default
 
+" Set the tab width to 4 spaces
+set tabstop=4
+set shiftwidth=4
+set ttyfast                                " More smooth screen redrawing
 "" ========================================================
 """ Search Optimizations
 "" ========================================================
@@ -31,6 +44,14 @@ set nerdtree             " File explorer with Vim-style navigation
 set easymotion           " Quick cursor navigation
 set notimeout            " Disable timeout waiting for keypress
 set which-key            " Display key mappings
+" disable the timeout option
+set notimeout
+
+" increase the timeoutlen (default: 1000), don't add space around the equal sign
+set timeoutlen=5000
+
+" make p paste normally, i.e. without yanking the replaced text https://superuser.com/questions/321547/how-do-i-replace-paste-yanked-text-in-vim-without-yanking-the-deleted-lines
+vnoremap p "_dP 
 
 "" ========================================================
 """ Plugin Settings
@@ -47,114 +68,101 @@ let g:WhichKey_SortOrder = "by_key_prefix_first"
 "" ========================================================
 
 let mapleader = " "
-let g:WhichKeyDesc_leader = "<leader> Leader key"
+let g:WhichKeyDesc_leader = "<leader><leader>"
+let g:WhichKeyDesc_commentray_prefix = "<leader><leader>"
 
 "" ========================================================
 """ Toggle Mappings (Comments & Regions)
 "" ========================================================
 
-let g:WhichKeyDesc_toggle = "<leader>t Toggle"
-let g:WhichKeyDesc_toggle_comment = "<leader>tc Comment"
-let g:WhichKeyDesc_toggle_blockComment = "<leader>tb Block Comment"
-let g:WhichKeyDesc_toggle_region = "<leader>tr Region"
+let g:WhichKeyDesc_toggle = "<leader><leader>t Toggle"
+let g:WhichKeyDesc_toggle_comment = "<leader><leader>tc Comment"
+let g:WhichKeyDesc_toggle_blockComment = "<leader><leader>tb Block Comment"
+let g:WhichKeyDesc_toggle_region = "<leader><leader>tr Region"
 
-map <leader>tc <Action>(CommentByLineComment)
-map <leader>tb <Action>(CommentByBlockComment)
-map <leader>tr <Action>(SurroundWithRegion)
+map <leader><leader>tc <Action>(CommentByLineComment)
+map <leader><leader>tb <Action>(CommentByBlockComment)
+map <leader><leader>tr <Action>(SurroundWithRegion)
 
 "" ========================================================
 """ Refactor Mappings
 "" ========================================================
 
-let g:WhichKeyDesc_refactor = "<leader>r Refactor"
-let g:WhichKeyDesc_refactor_rename = "<leader>rr Rename"
-let g:WhichKeyDesc_refactor_extractVariable = "<leader>rv Extract Variable"
-let g:WhichKeyDesc_refactor_extractMethod = "<leader>rm Extract Method"
-let g:WhichKeyDesc_refactor_inline = "<leader>ri Inline"
+let g:WhichKeyDesc_refactor = "<leader><leader>r Refactor"
+let g:WhichKeyDesc_refactor_rename = "<leader><leader>rr Rename"
+let g:WhichKeyDesc_refactor_extractVariable = "<leader><leader>rv Extract Variable"
+let g:WhichKeyDesc_refactor_extractMethod = "<leader><leader>rm Extract Method"
+let g:WhichKeyDesc_refactor_inline = "<leader><leader>ri Inline"
 
-map <leader>rr <Action>(RenameElement)
-map <leader>rv <Action>(IntroduceVariable)
-map <leader>rm <Action>(ExtractMethod)
-map <leader>ri <Action>(Inline)
-
-"" ========================================================
-""" Reformat Mappings
-"" ========================================================
-
-let g:WhichKeyDesc_format = "<leader>f Format"
-let g:WhichKeyDesc_format_code = "<leader>fr Reformat Code"
-let g:WhichKeyDesc_format_align = "<leader>fa Align"
-let g:WhichKeyDesc_format_indent = "<leader>fi Auto-Indent"
-
-map <leader>fr <Action>(ReformatCode)
-map <leader>fa <Action>(AlignSelection)
-map <leader>fi <Action>(AutoIndentLines)
+map <leader><leader>rr <Action>(RenameElement)
+map <leader><leader>rv <Action>(IntroduceVariable)
+map <leader><leader>rm <Action>(ExtractMethod)
+map <leader><leader>ri <Action>(Inline)
 
 "" ========================================================
 """ Vim Mappings
 "" ========================================================
 
-let g:WhichKeyDesc_vim = "<leader>v Vim"
-let g:WhichKeyDesc_vim_reload = "<leader>vr Reload ideavimrc"
+let g:WhichKeyDesc_vim = "<leader><leader>v Vim"
+let g:WhichKeyDesc_vim_reload = "<leader><leader>vr Reload ideavimrc"
 
-nnoremap <leader>vr :action IdeaVim.ReloadVimRc.reload<CR>
+nnoremap <leader><leader>vr :action IdeaVim.ReloadVimRc.reload<CR>
 
 "" ========================================================
 """ EasyMotion Mappings
 "" ========================================================
 
-let g:WhichKeyDesc_easymotion = "<leader>j Jump with Easymotion"
+let g:WhichKeyDesc_easymotion = "<leader><leader>j Jump with Easymotion"
 
-map <leader>j <Plug>(easymotion-s2)
-
-"" ========================================================
-""" Opening Windows
-"" ========================================================
-
-let g:WhichKeyDesc_open = "<leader>o Open"
-let g:WhichKeyDesc_open_explorer = "<leader>oe Explorer"
-let g:WhichKeyDesc_open_terminal = "<leader>ot Terminal"
-let g:WhichKeyDesc_open_git = "<leader>og Git"
-let g:WhichKeyDesc_open_services = "<leader>os Services"
-let g:WhichKeyDesc_open_commit = "<leader>oc Commit"
-let g:WhichKeyDesc_open_problems = "<leader>op Problems"
-let g:WhichKeyDesc_open_run = "<leader>or Run"
-let g:WhichKeyDesc_open_switcher = "<leader>oS All Tools"
-
-map <leader>oe :NERDTreeToggle<CR>
-map <leader>ot <Action>(ActivateTerminalToolWindow)
-map <leader>og <Action>(ActivateVersionControlToolWindow)
-map <leader>oc <Action>(ActivateCommitToolWindow)
-map <leader>os <Action>(ActivateServicesToolWindow)
-map <leader>or <Action>(ActivateRunToolWindow)
-map <leader>op <Action>(ActivateProblemsViewToolWindow)
-map <leader>oS <Action>(Switcher)
+map <leader><leader>j <Plug>(easymotion-s2)
 
 "" ========================================================
 """ Closing Windows
 "" ========================================================
 
-let g:WhichKeyDesc_close = "<leader>c Close"
-let g:WhichKeyDesc_close_others = "<leader>co Close Other Tabs"
-let g:WhichKeyDesc_close_activeTab = "<leader>ca Close Active Tab"
+let g:WhichKeyDesc_close = "<leader><leader>c Close"
+let g:WhichKeyDesc_close_others = "<leader><leader>co Close Other Tabs"
+let g:WhichKeyDesc_close_activeTab = "<leader><leader>ca Close Active Tab"
 
-map <leader>co <Action>(CloseAllEditorsButActive)
-map <leader>ca <Action>(CloseContent)
+map <leader><leader>co <Action>(CloseAllEditorsButActive)
+map <leader><leader>ca <Action>(CloseContent)
 
 "" ========================================================
 """ GoTo Mappings
 "" ========================================================
 
-let g:WhichKeyDesc_goto = "<leader>g Go to"
-let g:WhichKeyDesc_goto_declaration = "<leader>gd Declaration"
-let g:WhichKeyDesc_goto_implementation = "<leader>gi Implementation"
-let g:WhichKeyDesc_goto_type = "<leader>gt Type"
-let g:WhichKeyDesc_goto_line = "<leader>gl Line"
+let g:WhichKeyDesc_goto = "<leader><leader>g Go to"
+let g:WhichKeyDesc_goto_declaration = "<leader><leader>gd Declaration"
+let g:WhichKeyDesc_goto_implementation = "<leader><leader>gi Implementation"
+let g:WhichKeyDesc_goto_type = "<leader><leader>gt Type"
+let g:WhichKeyDesc_goto_line = "<leader><leader>gl Line"
 
-map <leader>gd <Action>(GotoDeclaration)
-map <leader>gi <Action>(GotoImplementation)
-map <leader>gt <Action>(GotoTypeDeclaration)
-map <leader>gl <Action>(GotoLine)
+map <leader><leader>gd <Action>(GotoDeclaration)
+map <leader><leader>gi <Action>(GotoImplementation)
+map <leader><leader>gt <Action>(GotoTypeDeclaration)
+map <leader><leader>gl <Action>(GotoLine)
+
+"" ========================================================
+""" Normal Mode Mappings
+"" ========================================================
+
+nnoremap ; i
+
+" Remap navigation keys
+ nnoremap i k
+ nnoremap k j
+ nnoremap j h
+ nnoremap l l
+
+"" ========================================================
+""" Visual Mode Mappings
+"" ========================================================
+
+" Navigation remapping in visual mode
+vnoremap i k
+vnoremap k j
+vnoremap j h
+vnoremap l l
 
 "" ========================================================
 """ Insert Mode Mappings
