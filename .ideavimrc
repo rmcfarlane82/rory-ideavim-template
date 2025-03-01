@@ -5,14 +5,14 @@
 "" ========================================================
 
 " General behavior
-set scrolloff=10         " Keep 10 lines on screen when scrolling
-set linenumber           " Show line numbers
-set showmode             " Show the current mode at the bottom
+set scrolloff=10                            " Keep 10 lines on screen when scrolling
+set linenumber                              " Show line numbers
+set showmode                                " Show the current mode at the bottom
 set showcmd              " Display executed commands at the bottom
 set visualbell           " Stop the annoying bell sound
-set clipboard+=unnamedplus " Use system clipboard
-" Enable auto-indentation
+set clipboard+=unnamedplus                 " Use system clipboard
 filetype plugin indent on                  " Enable automatic filetype detection, filetype-specific plugins/indentation
+
 " Indentation
 set autoindent                             " Keep the indent when creating a new line
 set smarttab                               " Use shiftwidth and softtabstop to insert or delete (on <BS>) blanks
@@ -25,6 +25,11 @@ set foldlevelstart=99                      " Expand all folds by default
 set tabstop=4
 set shiftwidth=4
 set ttyfast                                " More smooth screen redrawing
+
+" make p paste normally, i.e. without yanking the replaced text https://superuser.com/questions/321547/how-do-i-replace-paste-yanked-text-in-vim-without-yanking-the-deleted-lines
+vnoremap p "_dP 
+nnoremap dd "_dd
+
 "" ========================================================
 """ Search Optimizations
 "" ========================================================
@@ -44,15 +49,8 @@ set nerdtree             " File explorer with Vim-style navigation
 set easymotion           " Quick cursor navigation
 set notimeout            " Disable timeout waiting for keypress
 set which-key            " Display key mappings
-" disable the timeout option
-set notimeout
-
-" increase the timeoutlen (default: 1000), don't add space around the equal sign
-set timeoutlen=5000
-
-" make p paste normally, i.e. without yanking the replaced text https://superuser.com/questions/321547/how-do-i-replace-paste-yanked-text-in-vim-without-yanking-the-deleted-lines
-vnoremap p "_dP 
-nnoremap dd "_dd
+set notimeout            " disable the timeout option
+set timeoutlen=5000      " increase the timeoutlen (default: 1000), don't add space around the equal sign
 
 "" ========================================================
 """ Plugin Settings
