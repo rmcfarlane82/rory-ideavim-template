@@ -5,11 +5,11 @@
 "" ========================================================
 
 " General behavior
-set scrolloff=10                            " Keep 10 lines on screen when scrolling
-set linenumber                              " Show line numbers
-set showmode                                " Show the current mode at the bottom
-set showcmd              " Display executed commands at the bottom
-set visualbell           " Stop the annoying bell sound
+set scrolloff=10                           " Keep 10 lines on screen when scrolling
+set linenumber                             " Show line numbers
+set showmode                               " Show the current mode at the bottom
+set showcmd                                " Display executed commands at the bottom
+set visualbell                             " Stop the annoying bell sound
 set clipboard+=unnamedplus                 " Use system clipboard
 filetype plugin indent on                  " Enable automatic filetype detection, filetype-specific plugins/indentation
 
