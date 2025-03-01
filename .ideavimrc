@@ -52,6 +52,7 @@ set timeoutlen=5000
 
 " make p paste normally, i.e. without yanking the replaced text https://superuser.com/questions/321547/how-do-i-replace-paste-yanked-text-in-vim-without-yanking-the-deleted-lines
 vnoremap p "_dP 
+nnoremap dd "_dd
 
 "" ========================================================
 """ Plugin Settings
@@ -169,8 +170,14 @@ vnoremap l l
 "" ========================================================
 
 " Exit insert mode by typing 'jj'
-inoremap jj <Esc>
+inoremap jk <Esc>
 
 " Popup menu navigation
-inoremap <C-j> <Esc>:action PopupMenu-selectNext<CR>a
-inoremap <C-k> <Esc>:action PopupMenu-selectPrev<CR>a
+inoremap <C-k> <Esc>:action PopupMenu-selectNext<CR>a
+inoremap <C-i> <Esc>:action PopupMenu-selectPrev<CR>a
+
+" adds undo steps for the characters listed
+inoremap <Space> <C-g>u<Space>
+inoremap . <C-g>u.
+inoremap , <C-g>u,
+inoremap <CR> <C-g>u<CR>
